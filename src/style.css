@@ -1,0 +1,121 @@
+.jobDes {
+  padding-top: 80px;
+}
+.jobDesHead,
+.jobDesReq {
+  padding-top: 30px;
+}
+.jobDesHead .job_title {
+  font-family: "Roboto Slab", serif;
+  color: #012f61;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.jobDesReq .job_description {
+  font-weight: 600;
+}
+.jobDesReq .job_description,
+.jobDesReq .job_subtitle {
+  font-family: "Roboto Slab", serif;
+  color: #012f61;
+  letter-spacing: 1px;
+}
+.jobDesReq .job_des_point{
+  display: flex;
+  align-items: baseline;
+}
+.jobDesReq .job_des_point,
+.jobDesReq .job_note{
+  color: #7A7A7A;
+}
+.jobDesReq .job_des_point .fa-check-circle{
+  color: #d64e00;
+}
+.jobDesReq .experience {
+  font-size: 16px;
+  color:#7A7A7A;
+  font-weight: 500;
+}
+.jobDesReq .job_skills{
+  color: #012f61;
+  font-family: "Roboto Slab", serif;
+}
+.jobForm {
+  padding-bottom: 40px;
+}
+.jobForm .card {
+  border: 1px solid white;
+  box-shadow: 0 4px 10px #7c7c7c;
+  overflow: hidden;
+  border-radius: unset;
+  min-height: 700px;
+}
+.jobForm .card {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.jobForm .apply_here{
+  color:#d64e00;
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+  animation: blink 1.5s linear infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.jobForm .job_details{
+  color: #7A7A7A;
+}
+.jobForm .card-footer {
+  background-color: #fff;
+  border: none;
+  height: 88px;
+}
+.jobForm .card-footer button {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  background-color: #1484e0;
+  border-radius: 30px;
+  padding: 5px 40px 5px 40px;
+}
+.jobForm .card-footer button:hover{
+  background-color: rgba(20, 132, 224, 0.6);
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  font-size: 0.975rem;
+  line-height: 1;
+  vertical-align: top;
+  /* color: darkgray; */
+  color: #012f61;
+}
+.jobForm .form-control {
+  border: 1px solid #efefef;
+  border-radius: 0px;
+}
+.jobForm .form-control::placeholder {
+  visibility: hidden;
+}
+.jobForm .form-control:hover {
+  border-bottom: 1px solid #1484e0;
+}
+.jobForm .form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #efefef;
+  border-bottom: 1px solid #1484e0;
+  outline: 0;
+  box-shadow: 0 0  0 0.25rem rgba(255, 255, 255, 0.25);
+}
