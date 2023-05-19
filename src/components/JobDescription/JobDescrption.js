@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 
 const JobDescrption = () => {
   const [errMsg, setErrMsg] = useState(false);
+  const file = createRef();
+
   const [user, setUser] = useState({
     firstName: "",
     lastName :"",
@@ -9,7 +11,6 @@ const JobDescrption = () => {
     phone: "",
     experience: "",
     location: "",
-    resume: "",
   });
 
   let name, value;
@@ -31,7 +32,7 @@ const JobDescrption = () => {
     formData.set('email', user.email)
     formData.set('location', user.location)
     formData.set('experience', user.experience)
-    formData.set('resume', user.resume)
+    formData.set('resume', file.current.files[0]);
     // const { firstName, lastName, email, phone, experience, location, resume } = user;
     // if(!firstName || !lastName || !email || !phone || !experience || !location || !resume){
     //   setErrMsg(true);
@@ -222,6 +223,7 @@ const JobDescrption = () => {
                               name="resume"
                               className="form-control"
                               onChange={handleFormData}
+                              ref={file}
                             />
                              { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
