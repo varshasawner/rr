@@ -23,8 +23,15 @@ const JobDescrption = () => {
 
   const postData = async (e) => {
     e.preventDefault();
-
-    // const formData = new FormData;
+    
+    const formData = new FormData();
+    formData.set('firstName', user.firstName)
+    formData.set('lastName', user.lastName)
+    formData.set('phone', user.phone)
+    formData.set('email', user.email)
+    formData.set('location', user.location)
+    formData.set('experience', user.experience)
+    formData.set('resume', user.resume)
     // const { firstName, lastName, email, phone, experience, location, resume } = user;
     // if(!firstName || !lastName || !email || !phone || !experience || !location || !resume){
     //   setErrMsg(true);
@@ -32,10 +39,11 @@ const JobDescrption = () => {
 
     const res = await fetch("/applyJob", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept":"application/json"
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Accept":"application/json"
+      // },
+      body : formData
       // body: JSON.stringify({
       //   firstName,
       //   lastName,
