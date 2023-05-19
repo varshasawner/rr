@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const JobDescrption = () => {
+  const [errMsg, setErrMsg] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
     lastName :"",
@@ -23,7 +24,11 @@ const JobDescrption = () => {
   const postData = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, phone, experience, location, resume } = user;
+    // const formData = new FormData;
+    // const { firstName, lastName, email, phone, experience, location, resume } = user;
+    // if(!firstName || !lastName || !email || !phone || !experience || !location || !resume){
+    //   setErrMsg(true);
+    // }
 
     const res = await fetch("/applyJob", {
       method: "POST",
@@ -31,15 +36,15 @@ const JobDescrption = () => {
         "Content-Type": "application/json",
         "Accept":"application/json"
       },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        experience,
-        location,
-        resume,
-        phone,
-      }),
+      // body: JSON.stringify({
+      //   firstName,
+      //   lastName,
+      //   email,
+      //   experience,
+      //   location,
+      //   resume,
+      //   phone,
+      // }),
     });
 
     const data = await res.json();
@@ -138,7 +143,9 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                            { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
+                          
                           <div class="form-group">
                             <label>Last Name *</label>
                             <input
@@ -149,6 +156,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>Email *</label>
@@ -160,6 +168,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>Phone *</label>
@@ -171,6 +180,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>Experience in years *</label>
@@ -182,6 +192,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>Location *</label>
@@ -193,6 +204,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>Upload Resume Here *</label>
@@ -203,6 +215,7 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
+                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
                           </div>
                           <div class="form-group">
                             <label>CAPTCHA</label>
