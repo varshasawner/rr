@@ -1,0 +1,82 @@
+.contactPage {
+  /* background: url(../images/map-indore-transformedHd.png); */
+  background: url(../images/Contact.jpeg);
+  background-size: contain;
+  padding-top: 90px;
+  padding-bottom: 30px;
+}
+.contactForm {
+  padding-bottom: 40px;
+  background: #ffffff85;
+  /* background-color: rgba(20, 132, 224, 0.6); */
+}
+.contactHead {
+  padding-top: 40px;
+  background: #ffffff85;
+  /* background-color: rgba(20, 132, 224, 0.6); */
+}
+.contactHead h2 {
+  color: #012f61;
+  font-weight: 600;
+}
+.contactHead p {
+  font-size: 16px;
+  font-weight: 700;
+}
+.contactForm {
+  padding-top: 40px;
+}
+.contactForm .card {
+  border: 1px solid white;
+  box-shadow: 0 5px 10px #7c7c7c;
+  overflow: hidden;
+  border-radius: unset;
+  min-height: 600px;
+}
+.contactForm .card {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background: #ffffff85;
+}
+.contactForm .card .card-body {
+  padding-top: 40px;
+}
+.contactForm .card-footer {
+  /* background-color: #fff; */
+  background-color: #ffffff00;
+  border: none;
+  height: 88px;
+}
+.contactForm .card-footer button {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  background-color: #1484e0;
+  border-radius: 30px;
+  padding: 5px 40px 5px 40px;
+}
+.contactForm .card-footer button:hover{
+  background-color: rgba(20, 132, 224, 0.6);
+}
+.contactForm .form-control {
+  border: 1px solid #efefef;
+  border-radius: 0px;
+}
+
+.contactForm .form-control::placeholder {
+  visibility: hidden;
+}
+
+.contactForm .form-control:hover {
+  border-bottom: 1px solid #1484e0;
+}
+
+.contactForm .form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #efefef;
+  border-bottom: 1px solid #1484e0;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
