@@ -2,6 +2,7 @@ import React, { createRef, useState } from "react";
 
 const JobDescrption = () => {
   const [errMsg, setErrMsg] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
   const file = createRef();
 
   const [user, setUser] = useState({
@@ -11,11 +12,11 @@ const JobDescrption = () => {
     phone: "",
     experience: "",
     location: "",
+    resume : ""
   });
 
   let name, value;
   const handleFormData = (e) => {
-    // console.log(e);
     name = e.target.name;
     value = e.target.value;
 
@@ -40,20 +41,7 @@ const JobDescrption = () => {
 
     const res = await fetch("/applyJob", {
       method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   "Accept":"application/json"
-      // },
       body : formData
-      // body: JSON.stringify({
-      //   firstName,
-      //   lastName,
-      //   email,
-      //   experience,
-      //   location,
-      //   resume,
-      //   phone,
-      // }),
     });
 
     const data = await res.json();
@@ -61,8 +49,17 @@ const JobDescrption = () => {
       window.alert("Invalid registration");
     } else {
       console.log(data)
-      // window.alert("Registration Successfull");
-      // navigate('/register');
+      setSuccessMsg(data.message)
+      alert(data.message);
+      setUser({
+        firstName: "",
+        lastName :"",
+        email: "",
+        phone: "",
+        experience: "",
+        location: "",
+        resume : ""
+      })
     }
   };
 

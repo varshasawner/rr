@@ -1,6 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 const Contact = () => {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [userData, setUserData] = useState({
+    fullName : "",
+    email : "",
+    companyName : "",
+    companyLocation : "",
+    phone : "",
+    budget : "",
+    aboutProject : ""
+  })
+
+  let name, value;
+  const handleFormData = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+
+    setUserData({...userData, [name]:value})
+    console.log(userData)
+  }
+
+  const sendContact = async (e) =>{
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.set('fullName',userData.fullName);
+    formData.set('email',userData.email);
+    formData.set('companyName',userData.companyName);
+    formData.set('companyLocation',userData.companyLocation);
+    formData.set('phone',userData.phone);
+    formData.set('budget',userData.budget);
+    formData.set('aboutProject',userData.aboutProject);
+
+    const res = await fetch("/contact", {
+      method:"post",
+      body : formData
+    })
+    const data = await res.json();
+    if (data.status === 422 || !data) {
+      window.alert("Invalid registration");
+    } else {
+      console.log(data)
+      setSuccessMsg(data.message);
+      alert(data.message);
+      setUserData({
+        fullName : "",
+        email : "",
+        companyName : "",
+        companyLocation : "",
+        phone : "",
+        budget : "",
+        aboutProject : ""
+      });
+    }
+
+  }
   return (
     <>
       <div className="contactPage">
@@ -19,7 +75,7 @@ const Contact = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <form method="POST" id="reset" encType="multipat/form-data">
+                <form method="POST" id="reset" encType="multipat/form-data" onSubmit={sendContact}>
                   <div className="card-body">
                     <div className="row">
                       <div class="form-group col">
@@ -27,10 +83,10 @@ const Contact = () => {
                         <input
                           type="text"
                           placeholder="Enter Full Name"
-                          // value=""
+                          value={userData.fullName}
                           name="fullName"
                           className="form-control"
-                          //   onChange={handleFormData}
+                          onChange={handleFormData}
                         />
                       </div>
                       <div class="form-group col">
@@ -38,10 +94,10 @@ const Contact = () => {
                         <input
                           type="text"
                           placeholder="Enter Company Name"
-                          // value=""
+                          value={userData.companyName}
                           name="companyName"
                           className="form-control"
-                          //   onChange={handleFormData}
+                          onChange={handleFormData}
                         />
                       </div>
                     </div>
@@ -51,10 +107,10 @@ const Contact = () => {
                         <input
                           type="text"
                           placeholder="Enter Location"
-                          // value=""
-                          name="location"
+                          value={userData.companyLocation}
+                          name="companyLocation"
                           className="form-control"
-                          //   onChange={handleFormData}
+                          onChange={handleFormData}
                         />
                       </div>
                       <div class="form-group col">
@@ -62,10 +118,10 @@ const Contact = () => {
                         <input
                           type="email"
                           placeholder="Enter Email"
-                          // value=""
+                          value={userData.email}
                           name="email"
                           className="form-control"
-                          //   onChange={handleFormData}
+                          onChange={handleFormData}
                         />
                       </div>
                     </div>
@@ -75,10 +131,10 @@ const Contact = () => {
                         <input
                           type="text"
                           placeholder="Enter Phone Number"
-                          // value=""
+                          value={userData.phone}
                           name="phone"
                           className="form-control"
-                          //   onChange={handleFormData}
+                            onChange={handleFormData}
                         />
                       </div>
                       <div class="form-group col">
@@ -86,10 +142,10 @@ const Contact = () => {
                         <input
                           type="text"
                           placeholder="Enter Approx Budget"
-                          // value=""
+                          value={userData.budget}
                           name="budget"
                           className="form-control"
-                          //   onChange={handleFormData}
+                          onChange={handleFormData}
                         />
                       </div>
                     </div>
@@ -97,12 +153,12 @@ const Contact = () => {
                     <div class="form-group">
                       <label>Tell us about your project *</label>
                       <textarea
-                        // value=""
+                        value={userData.aboutProject}
                         name="aboutProject"
                         placeholder="Tell us about your project"
                         rows="6"
                         className="form-control"
-                        //   onChange={handleFormData}
+                        onChange={handleFormData}
                       />
                     </div>
                     <div class="form-group">
@@ -110,7 +166,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="card-footer">
-                    <button>Submit</button>
+                    <input type="submit" value="Submit" />
                   </div>
                 </form>
               </div>
