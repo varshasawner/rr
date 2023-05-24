@@ -7,12 +7,12 @@ const JobDescrption = () => {
 
   const [user, setUser] = useState({
     firstName: "",
-    lastName :"",
+    lastName: "",
     email: "",
     phone: "",
     experience: "",
     location: "",
-    resume : ""
+    resume: "",
   });
 
   let name, value;
@@ -25,15 +25,15 @@ const JobDescrption = () => {
 
   const postData = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData();
-    formData.set('firstName', user.firstName)
-    formData.set('lastName', user.lastName)
-    formData.set('phone', user.phone)
-    formData.set('email', user.email)
-    formData.set('location', user.location)
-    formData.set('experience', user.experience)
-    formData.set('resume', file.current.files[0]);
+    formData.set("firstName", user.firstName);
+    formData.set("lastName", user.lastName);
+    formData.set("phone", user.phone);
+    formData.set("email", user.email);
+    formData.set("location", user.location);
+    formData.set("experience", user.experience);
+    formData.set("resume", file.current.files[0]);
     // const { firstName, lastName, email, phone, experience, location, resume } = user;
     // if(!firstName || !lastName || !email || !phone || !experience || !location || !resume){
     //   setErrMsg(true);
@@ -41,25 +41,25 @@ const JobDescrption = () => {
 
     const res = await fetch("/applyJob", {
       method: "POST",
-      body : formData
+      body: formData,
     });
 
     const data = await res.json();
     if (data.status === 422 || !data) {
       window.alert("Invalid registration");
     } else {
-      console.log(data)
-      setSuccessMsg(data.message)
+      console.log(data);
+      setSuccessMsg(data.message);
       alert(data.message);
       setUser({
         firstName: "",
-        lastName :"",
+        lastName: "",
         email: "",
         phone: "",
         experience: "",
         location: "",
-        resume : ""
-      })
+        resume: "",
+      });
     }
   };
 
@@ -138,7 +138,7 @@ const JobDescrption = () => {
                           method="POST"
                           id="reset"
                           encType="multipat/form-data"
-                         >
+                        >
                           <div class="form-group">
                             <label>First Name *</label>
                             <input
@@ -149,9 +149,15 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
-                          
+
                           <div class="form-group">
                             <label>Last Name *</label>
                             <input
@@ -162,7 +168,13 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>Email *</label>
@@ -174,7 +186,13 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>Phone *</label>
@@ -186,7 +204,13 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>Experience in years *</label>
@@ -198,7 +222,13 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>Location *</label>
@@ -210,7 +240,13 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>Upload Resume Here *</label>
@@ -222,17 +258,21 @@ const JobDescrption = () => {
                               onChange={handleFormData}
                               ref={file}
                             />
-                             { errMsg ? <span style={{color:"red"}}>Please Fill This Field</span> : ""}
+                            {errMsg ? (
+                              <span style={{ color: "red" }}>
+                                Please Fill This Field
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div class="form-group">
                             <label>CAPTCHA</label>
                           </div>
-                          <input type="submit" value="Submit"/>
+                          <input type="submit" value="Submit" />
                         </form>
                       </div>
-                      <div className="card-footer">
-                     
-                      </div>
+                      <div className="card-footer"></div>
                     </div>
                   </div>
                 </div>

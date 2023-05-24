@@ -1,0 +1,54 @@
+.contact_section{
+	margin-top: 50px;
+  margin-bottom: 50px;
+}
+.contact_section .contact_title{
+	color: #012f61;
+	font-weight: 600;
+}
+.contact_section .contactsubtitle{
+	color: #7A7A7A;
+	font-size: 17px;
+	font-weight: 600;
+  letter-spacing: 1px;
+}
+.contact_section .contact_card{
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+	border: none;
+}
+.contact_section .contact_field{
+	border: 1px solid #ced4da;
+	border-radius: 0;
+	box-shadow: none !important;
+	padding: 12px;
+	color: #7A7A7A !important ;
+}
+.contact_section .contact_field:focus{
+	border: 1px solid #1484E0 ;
+}
+.contact_section textarea{
+	resize: none;
+}
+.contact_section .captcha{
+	color: #7A7A7A;
+	font-size: 18px;
+}
+.contact_section .form-check-label{
+	color: #7A7A7A;
+	font-size: 17px;
+}
+.contact_section .form-check-input{
+	box-shadow: none !important;
+	color: #7A7A7A;
+}
+.contact_section .btn_submit{
+	/*color: #fff;*/
+	background-color: #1484E0 !important;
+	border-radius: 50px;
+	padding: 8px 44px 8px 44px;
+	font-size: 18px;
+
+}
+.contact_section .btn_submit:hover{
+	background-color: rgba(20, 132, 224, 0.8) !important;
+}
