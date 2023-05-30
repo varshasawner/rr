@@ -1,8 +1,7 @@
 import React, { createRef, useState } from "react";
 
 const JobDescrption = () => {
-  const [errMsg, setErrMsg] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
+  const [msg, setMsg] = useState("");
   const file = createRef();
 
   const [user, setUser] = useState({
@@ -45,12 +44,12 @@ const JobDescrption = () => {
     });
 
     const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert("Invalid registration");
+    if (data.status === 422 || data.error) {
+      setMsg(data);
+      // console.log(msg.error)
     } else {
       console.log(data);
-      setSuccessMsg(data.message);
-      alert(data.message);
+      setMsg(data);
       setUser({
         firstName: "",
         lastName: "",
@@ -138,6 +137,7 @@ const JobDescrption = () => {
                           method="POST"
                           id="reset"
                           encType="multipat/form-data"
+                          className="mb-2"
                         >
                           <div class="form-group">
                             <label>First Name *</label>
@@ -149,13 +149,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
 
                           <div class="form-group">
@@ -168,13 +161,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>Email *</label>
@@ -186,13 +172,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>Phone *</label>
@@ -204,13 +183,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>Experience in years *</label>
@@ -222,13 +194,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>Location *</label>
@@ -240,13 +205,6 @@ const JobDescrption = () => {
                               className="form-control"
                               onChange={handleFormData}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>Upload Resume Here *</label>
@@ -258,19 +216,20 @@ const JobDescrption = () => {
                               onChange={handleFormData}
                               ref={file}
                             />
-                            {errMsg ? (
-                              <span style={{ color: "red" }}>
-                                Please Fill This Field
-                              </span>
-                            ) : (
-                              ""
-                            )}
                           </div>
                           <div class="form-group">
                             <label>CAPTCHA</label>
                           </div>
                           <input type="submit" value="Submit" />
                         </form>
+
+                        {msg.message ? <div className="alert alert-success text-center" role="alert">
+                          {msg.message}
+                        </div> : ""}
+                        {msg.error ? 
+                        <div className="alert alert-danger text-center" role="alert">
+                           {msg.error}
+                        </div> : ""}
                       </div>
                       <div className="card-footer"></div>
                     </div>

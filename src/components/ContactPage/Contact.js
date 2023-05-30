@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 const Contact = () => {
-  const [successMsg, setSuccessMsg] = useState("");
+  const [msg, setMsg] = useState("");
   const [userData, setUserData] = useState({
     fullName : "",
     email : "",
@@ -39,12 +39,12 @@ const Contact = () => {
       body : formData
     })
     const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert("Invalid registration");
+    if (data.status === 422 || data) {
+      setMsg(data.error)
     } else {
       console.log(data)
-      setSuccessMsg(data.message);
-      alert(data.message);
+      setMsg(data.message);
+      
       setUserData({
         fullName : "",
         email : "",
@@ -168,6 +168,14 @@ const Contact = () => {
                   <div className="card-footer">
                     <input type="submit" value="Submit" />
                   </div>
+
+                  {msg.message ? <div className="alert alert-success text-center" role="alert">
+                          {msg.message}
+                        </div> : ""}
+                        {msg.error ? 
+                        <div className="alert alert-danger text-center" role="alert">
+                           {msg.error}
+                        </div> : ""}
                 </form>
               </div>
             </div>

@@ -1,0 +1,189 @@
+.portfolio {
+  padding-top: 80px;
+  background: repeating-linear-gradient(135deg, #00045e61, transparent 400px);
+  /* background: repeating-linear-gradient(135deg, #00045e61, #00055e 1px); */
+}
+.portfolio .tab-panel {
+  padding: 40px 0;
+}
+.portfolioGallery {
+  padding-top: 40px;
+}
+.portfolioGallery h3 {
+  color: #012f61;
+}
+.portfolio .tab-line > .nav-tabs {
+  border: none;
+  flex-wrap: nowrap;
+  margin: 0;
+  overflow-y: hidden;
+  right: 0;
+  left: 0;
+}
+.portfolio ul {
+  margin: 0;
+  padding: 0;
+}
+.portfolio .portfolio_tab-panel {
+  border: none !important;
+  margin-top: 10px;
+}
+
+.portfolio .tab-line > .nav-tabs > li {
+  position: relative;
+  margin-right: 2px;
+  white-space: nowrap;
+}
+
+.tab-line .nav-tabs {
+  justify-content: center;
+}
+@media (max-width: 524px) {
+  .tab-line .nav-tabs {
+    justify-content: revert !important;
+  }
+}
+.portfolio .portfolio_tab-panel .tab-line > .nav-tabs > li > a {
+  position: relative;
+  color: black;
+  /* color: white; */
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-left: 0;
+  margin-right: 20px;
+  border: 0;
+  padding: 5px 0;
+}
+.portfolio .portfolio_tab-panel .tab-line > .nav-tabs > li > .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00045e;
+  /* border-bottom: 4px solid #00045e; */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 800ms ease;
+  margin-bottom: 4px;
+}
+.portfolio
+  .portfolio_tab-panel
+  .tab-line
+  > .nav-tabs
+  > li
+  > .nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+  box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.1);
+}
+.portfolio .nav-tabs .nav-link {
+  /* border: 0px; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.portfolio .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-radius: 0px;
+  background-color: initial !important;
+  color: #012f61 !important;
+  font-weight: 800 !important;
+}
+.portfolio .portfolio_tab-panel .tab-line .tab-content {
+  margin-top: 30px;
+  padding: 0 !important;
+  border: 0;
+  padding: 25px 15px;
+}
+.portfolio .galleryContainer {
+  max-width: 80rem;
+  width: 100%;
+  padding: 3rem 0rem;
+  margin: 0 auto;
+}
+.portfolio .main .galleryContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.portfolio .main .card {
+  color: #252a32;
+  border-radius: 2px;
+  border: 0px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+  transition: transform 0.9s ease-out;
+  z-index: 0;
+  overflow: hidden;
+}
+.portfolio .main .card-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 70%;
+  background: #fff;
+}
+.portfolio .main .card-image img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portfolio .main .card .content {
+  /* content: ""; */
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  right: 16px;
+  font-size: 18px;
+  color: black;
+  display: none;
+}
+.portfolio .main .card:hover .content {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  right: 16px;
+  color: #fff;
+  display: block;
+}
+.portfolio .main .card:before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -28px;
+  right: -28px;
+  background: #00055e80;
+  /* background: repeating-linear-gradient(135deg, #00055e80, #00055eb8 1px); */
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.9s ease-out;
+}
+.portfolio .main .card:hover:before {
+  transform: scale(25);
+}
+.portfolio .main .card:hover p {
+  transition: all 0.8s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+.portfolio .main .card:hover h3 {
+  transition: all 0.8s ease-out;
+  color: #ffffff;
+}
+@media only screen and (max-width: 600px) {
+  .portfolio .main .galleryContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+}

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const ContactHome = () => {
-  const [successMsg, setSuccessMsg] = useState("");
+  const [msg, setMsg] = useState("");
+  const [GenCaptcha, setGenCaptcha] = useState("");
+  const [agree, setAgree] = useState(false);
   const [contactHomeData, setcontactHomeData] = useState({
     fullName: "",
     email: "",
@@ -17,32 +19,58 @@ const ContactHome = () => {
     // console.log(contactHomeData);
   };
 
+  const checkboxHandler = () => {
+    console.log(agree);
+    setAgree(!agree);
+  };
+
+  function generate() {
+    let uniquechar = "";
+    const randomchar =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 1; i <= 6; i++) {
+      uniquechar += randomchar.charAt(Math.random() * randomchar.length);
+    }
+    // Store generated input
+    setGenCaptcha(uniquechar);
+  }
+  useEffect(() => {
+    generate();
+  }, []);
+
   const sendContactHomeData = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.set("fullName", contactHomeData.fullName);
-    formData.set("email", contactHomeData.email);
-    formData.set("message", contactHomeData.message);
+    if (agree === true) {
+      const formData = new FormData();
+      formData.set("fullName", contactHomeData.fullName);
+      formData.set("email", contactHomeData.email);
+      formData.set("message", contactHomeData.message);
 
-    const res = await fetch("/contactHome", {
-      method: "post",
-      body: formData,
-    });
-    const data = await res.json();
-    if (data.status === 422 || !data) {
-      window.alert(data.message);
-    } else {
-      console.log(data);
-      setSuccessMsg(data.message);
-      alert(data.message);
-      setcontactHomeData({
-        fullName: "",
-        email: "",
-        message: "",
+      const res = await fetch("/contactHome", {
+        method: "post",
+        body: formData,
       });
+      const data = await res.json();
+      if (data.status === 422 || data) {
+        setMsg(data);
+        generate();
+      } else {
+        // console.log(data);
+        setMsg(data);
+        setcontactHomeData({
+          fullName: "",
+          email: "",
+          message: "",
+        });
+        generate();
+      }
+    } else {
+      const data = { error: "Please Check Terms & Conditions" };
+      setMsg(data);
     }
   };
+
   return (
     <div>
       <div className="contact_section">
@@ -79,8 +107,7 @@ const ContactHome = () => {
                           onChange={handleFormData}
                         />
                       </div>
-                    </div>
-                    <div className="row pt-3">
+        
                       <div className="col-md-12">
                         <textarea
                           className="form-control contact_field"
@@ -92,12 +119,23 @@ const ContactHome = () => {
                         ></textarea>
                       </div>
                     </div>
-                    <h6 className="pt-5 captcha">CAPTCHA</h6>
+
+                    <div className="form-group pt-3">
+                      <input
+                        type="text"
+                        className="captcha_code"
+                        placeholder={GenCaptcha}
+                        readOnly
+                      ></input>
+                      <i className="fa fa-recycle"></i>
+                    </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
                         name=""
                         className="form-check-input"
+                        id="agree"
+                        onChange={checkboxHandler}
                       />
                       <label className="form-check-label">
                         By submitting the form, I agree to the privacy policy
@@ -111,6 +149,26 @@ const ContactHome = () => {
                       />
                     </div>
                   </form>
+                  {msg.message ? (
+                    <div
+                      className="alert alert-success text-center"
+                      role="alert"
+                    >
+                      {msg.message}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {msg.error ? (
+                    <div
+                      className="alert alert-danger text-center"
+                      role="alert"
+                    >
+                      {msg.error}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>
