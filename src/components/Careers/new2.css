@@ -1,0 +1,250 @@
+.careers {
+  padding-top: 130px;
+}
+.careers .diagonal-box {
+  position: relative;
+  padding: calc(10vw * 0.03495) 0;
+  margin-top: -1px;
+}
+.careers .diagonal-box:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* transform: skewy(var(--angle)); */
+  transform: skewy(-4deg);
+  transform-origin: 50% 0;
+  outline: 1px solid transparent;
+  backface-visibility: hidden;
+}
+.careers .bg-one:before {
+  /* background-image: linear-gradient(286deg, #00045e, #ce8a57); */
+  background: #e3f1fc;
+}
+.careerSec1 h2 {
+  color: #012f61;
+  font-weight: 600;
+}
+.careerSec1 p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #012f61;
+}
+.careerSec1 .content {
+  /* padding: 4.5em; */
+  padding-top: 100px;
+}
+.careerSec1 .content p {
+  padding-top: 20px;
+}
+.careerSec1 .img {
+  padding: 1.5em;
+}
+.careerSec1 .content,
+.careerSec1 .img {
+  max-width: 100vw;
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.careerSec2 h2,
+.careerSec2 h3,
+.careerSec3 h3,
+.careerSec4 h3 {
+  font-weight: 600;
+  color: #012f61;
+  letter-spacing: 1px;
+}
+
+.careerSec2 p,
+.careerSec3 p,
+.careerSec4 p {
+  /* font-size: 17px; */
+  font-weight: 400;
+  color: #7A7A7A;
+}
+
+.careerSec2 .content,
+.careerSec3 .content,
+.careerSec4 .content,
+.careerSec2 .img,
+.careerSec3 .img,
+.careerSec4 .img {
+  max-width: 100vw;
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  position: relative;
+}
+.careerSec2 .img,
+.careerSec3 .img,
+.careerSec4 .img {
+  padding-top: 1.5em;
+}
+.careerSec2 .content2 {
+  padding-top: 100px;
+}
+
+.careerSec3 .content,
+.careerSec4 .content {
+  padding-top: 200px;
+}
+.joinTeam {
+  /* background: #e3f1fc; */
+  padding-bottom: 20px;
+  /* background: linear-gradient(340deg, #e3f1fc 50%, #fff 50%); */
+  padding-top: 80px;
+  /* background: #e6e9ec; */
+}
+.fullFill {
+  padding-top: 80px;
+}
+.learning,
+.leadership {
+  padding-top: 40px;
+}
+.leadership .careerSec3 .career_order1{
+  order: 2;
+}
+.leadership .careerSec3 .career_order2 {
+  order: 1;
+}
+.careerSec5 h2,
+.careerSec5 h4,
+.careerSec5 h5 {
+  text-align: center;
+  font-weight: 500;
+}
+.careerSec5 h2 {
+  color: #012f61;
+  font-weight: 800;
+}
+.careerSec5 h4 {
+  color: #d64e00;
+  /* color: #d64e00; */
+}
+
+.careerSec5 .cardSec .card {
+  /* border: 1px solid white; */
+  border: none;
+  box-shadow: 0 6px 10px #7c7c7c;
+  overflow: hidden;
+  border-radius: unset;
+  height: 300px;
+}
+.careerSec5 .cardSec .card {
+  text-align: center;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+.careerSec5 .cardSec .card::after {
+  content: "";
+  position: absolute;
+  /* bottom: 0;
+  left: 0; */
+  width: 100%;
+  height: 3px;
+  background: #00045e;
+  /* border: 2px solid black; */
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 800ms ease;
+}
+.careerSec5 .cardSec .card:hover::after {
+  transform: scaleX(1);
+  transform-origin: center;
+  box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.1);
+}
+.careerSec5 .cardSec .card-body .role {
+  font-size: 20px;
+  font-weight: 500;
+  transform: scaleX(1);
+  transition: transform 0.2s ease-in-out;
+  /* border-bottom: 1.5px solid #00000054; */
+}
+.careerSec5 .card:hover .role {
+  transform: scaleX(1.06);
+  text-shadow: 0px 4px 5px 2px darkgrey;
+}
+.careerSec5 .cardSec .card-body .divider {
+  border-bottom: 1.5px solid #00000054;
+}
+.careerSec5 .cardSec .card-footer {
+  background-color: #fff;
+  border: none;
+  height: 57px;
+}
+
+.careerSec5 .cardSec .card-footer button {
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+  background-color: #d64e00;
+  /* position: absolute; */
+  position: relative;
+  border: none;
+  padding: 5px 20px 5px 20px;
+  border-radius: 0px;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+@media (max-width: 1200px) {
+  .careerSec3 .content,
+  .careerSec4 .content {
+    padding-top: 100px;
+  }
+}
+@media (max-width: 992px) {
+  .careerSec2 p,
+  .careerSec3 p,
+  .careerSec4 p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .careerSec2 .content2 {
+    padding-top: 80px;
+  }
+  .careerSec3 .content,
+  .careerSec4 .content {
+    padding-top: 80px;
+  }
+  .careerSec5 .cardSec .card-body .role {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .believes .content {
+    padding-top: 10px;
+  }
+  .chooseUs .content,
+  .gallery .content {
+    padding-top: 20px;
+  }
+  .careers,
+  .company {
+    padding-top: 110px;
+  }
+}
+@media (max-width: 768px) {
+  .careerSec5 .cardSec .card {
+    height: 250px;
+  }
+  .learning,
+  .leadership {
+    padding-top: 20px;
+  }
+  .careers,
+  .company {
+    padding-top: 100px;
+  }
+}
+@media screen and (max-width: 290px){
+  .careerSec5 .cardSec .card {
+    height: 300px;
+  }
+}

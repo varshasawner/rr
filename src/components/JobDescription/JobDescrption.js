@@ -1,6 +1,7 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState, useEffect } from "react";
 
 const JobDescrption = () => {
+  const [GenCaptcha, setGenCaptcha] = useState("");
   const [msg, setMsg] = useState("");
   const file = createRef();
 
@@ -12,13 +13,13 @@ const JobDescrption = () => {
     experience: "",
     location: "",
     resume: "",
+    captchaText: ""
   });
 
   let name, value;
   const handleFormData = (e) => {
     name = e.target.name;
     value = e.target.value;
-
     setUser({ ...user, [name]: value });
   };
 
@@ -33,6 +34,8 @@ const JobDescrption = () => {
     formData.set("location", user.location);
     formData.set("experience", user.experience);
     formData.set("resume", file.current.files[0]);
+    formData.set("captcha", GenCaptcha);
+    formData.set("captchaText", user.captchaText);
     // const { firstName, lastName, email, phone, experience, location, resume } = user;
     // if(!firstName || !lastName || !email || !phone || !experience || !location || !resume){
     //   setErrMsg(true);
@@ -50,6 +53,7 @@ const JobDescrption = () => {
     } else {
       console.log(data);
       setMsg(data);
+      generate();
       setUser({
         firstName: "",
         lastName: "",
@@ -58,9 +62,25 @@ const JobDescrption = () => {
         experience: "",
         location: "",
         resume: "",
+        captchaText: ""
       });
+      generate();
     }
   };
+
+  function generate() {
+    let uniquechar = "";
+    const randomchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 1; i <= 6; i++) {
+      uniquechar += randomchar.charAt(Math.random() * randomchar.length);
+    }
+    // Store generated input
+    setGenCaptcha(uniquechar);
+  }
+
+  useEffect(()=>{
+    generate();
+  },[])
 
   return (
     <>
@@ -144,9 +164,9 @@ const JobDescrption = () => {
                             <input
                               value={user.firstName}
                               type="text"
-                              placeholder="Enter First Name"
                               name="firstName"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -156,9 +176,9 @@ const JobDescrption = () => {
                             <input
                               value={user.lastName}
                               type="text"
-                              placeholder="Enter Last Name"
                               name="lastName"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -167,9 +187,9 @@ const JobDescrption = () => {
                             <input
                               value={user.email}
                               type="email"
-                              placeholder="Enter Email"
                               name="email"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -178,9 +198,9 @@ const JobDescrption = () => {
                             <input
                               value={user.phone}
                               type="text"
-                              placeholder="Enter Phone Number"
                               name="phone"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -188,10 +208,10 @@ const JobDescrption = () => {
                             <label>Experience in years *</label>
                             <input
                               type="text"
-                              placeholder="Enter Experience"
                               value={user.experience}
                               name="experience"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -200,9 +220,9 @@ const JobDescrption = () => {
                             <input
                               value={user.location}
                               type="text"
-                              placeholder="Enter Location"
                               name="location"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                             />
                           </div>
@@ -213,21 +233,35 @@ const JobDescrption = () => {
                               type="file"
                               name="resume"
                               className="form-control"
+                              autoComplete="new-password"
                               onChange={handleFormData}
                               ref={file}
                             />
                           </div>
                           <div class="form-group">
-                            <label>CAPTCHA</label>
+                            <label>Captcha *</label>
+                            <input type="text" 
+                            value={user.captchaText}
+                            className="form-control" 
+                            autoComplete="new-password" 
+                            name="captchaText"
+                            onChange={handleFormData}
+                          ></input>
                           </div>
-                          <input type="submit" value="Submit" />
+                          <div className="form-group">
+                            <input type="text" className="captcha_code" placeholder={GenCaptcha} readOnly></input>
+                            <i className="fa fa-recycle"></i>
+                          </div>
+                          <div className="card-footer">
+                            <input type="submit" className="job-btn" value="Submit"/>
+                          </div>
                         </form>
 
-                        {msg.message ? <div className="alert alert-success text-center" role="alert">
+                        {msg.message ? <div className="text-success">
                           {msg.message}
                         </div> : ""}
                         {msg.error ? 
-                        <div className="alert alert-danger text-center" role="alert">
+                        <div className="text-danger">
                            {msg.error}
                         </div> : ""}
                       </div>

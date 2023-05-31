@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 const Contact = () => {
+  const [GenCaptcha, setGenCaptcha] = useState("");
   const [msg, setMsg] = useState("");
   const [userData, setUserData] = useState({
     fullName : "",
@@ -10,7 +11,8 @@ const Contact = () => {
     companyLocation : "",
     phone : "",
     budget : "",
-    aboutProject : ""
+    aboutProject : "",
+    captchaText:""
   })
 
   let name, value;
@@ -33,18 +35,20 @@ const Contact = () => {
     formData.set('phone',userData.phone);
     formData.set('budget',userData.budget);
     formData.set('aboutProject',userData.aboutProject);
+    formData.set('captcha',GenCaptcha);
+    formData.set('captchaText',userData.captchaText);
 
     const res = await fetch("/contact", {
       method:"post",
       body : formData
     })
     const data = await res.json();
-    if (data.status === 422 || data) {
-      setMsg(data.error)
+    if (data.status === 422 || data.error) {
+      setMsg(data);
+      generate();
     } else {
       console.log(data)
-      setMsg(data.message);
-      
+      setMsg(data);
       setUserData({
         fullName : "",
         email : "",
@@ -52,11 +56,25 @@ const Contact = () => {
         companyLocation : "",
         phone : "",
         budget : "",
-        aboutProject : ""
+        aboutProject : "",
+        captchaText:""
       });
+      generate()
     }
-
   }
+  function generate() {
+    let uniquechar = "";
+    const randomchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 1; i <= 6; i++) {
+      uniquechar += randomchar.charAt(Math.random() * randomchar.length);
+    }
+    // Store generated input
+    setGenCaptcha(uniquechar);
+  }
+  useEffect(()=>{
+    generate();
+  },[])
+  
   return (
     <>
       <div className="contactPage">
@@ -82,10 +100,10 @@ const Contact = () => {
                         <label>Full Name *</label>
                         <input
                           type="text"
-                          placeholder="Enter Full Name"
                           value={userData.fullName}
                           name="fullName"
                           className="form-control"
+                          autoComplete="new-password"
                           onChange={handleFormData}
                         />
                       </div>
@@ -93,10 +111,10 @@ const Contact = () => {
                         <label>Company Name *</label>
                         <input
                           type="text"
-                          placeholder="Enter Company Name"
                           value={userData.companyName}
                           name="companyName"
                           className="form-control"
+                          autoComplete="new-password"
                           onChange={handleFormData}
                         />
                       </div>
@@ -106,10 +124,10 @@ const Contact = () => {
                         <label>Company Location *</label>
                         <input
                           type="text"
-                          placeholder="Enter Location"
                           value={userData.companyLocation}
                           name="companyLocation"
                           className="form-control"
+                          autoComplete="new-password"
                           onChange={handleFormData}
                         />
                       </div>
@@ -117,10 +135,10 @@ const Contact = () => {
                         <label>Work Email Address *</label>
                         <input
                           type="email"
-                          placeholder="Enter Email"
                           value={userData.email}
                           name="email"
                           className="form-control"
+                          autoComplete="new-password"
                           onChange={handleFormData}
                         />
                       </div>
@@ -130,21 +148,21 @@ const Contact = () => {
                         <label>Phone Number *</label>
                         <input
                           type="text"
-                          placeholder="Enter Phone Number"
                           value={userData.phone}
                           name="phone"
                           className="form-control"
-                            onChange={handleFormData}
+                          autoComplete="new-password"
+                          onChange={handleFormData}
                         />
                       </div>
                       <div class="form-group col">
                         <label>Approx Budget *</label>
                         <input
                           type="text"
-                          placeholder="Enter Approx Budget"
                           value={userData.budget}
                           name="budget"
                           className="form-control"
+                          autoComplete="new-password"
                           onChange={handleFormData}
                         />
                       </div>
@@ -155,25 +173,30 @@ const Contact = () => {
                       <textarea
                         value={userData.aboutProject}
                         name="aboutProject"
-                        placeholder="Tell us about your project"
                         rows="6"
                         className="form-control"
+                        autoComplete="new-password"
                         onChange={handleFormData}
                       />
                     </div>
                     <div class="form-group">
-                      <label>CAPTCHA</label>
+                      <label>Captcha *</label>
+                      <input type="text" className="form-control contact_row" value={userData.captchaText} onChange={handleFormData} name="captchaText"></input>
+                    </div>
+                    <div className="form-group">
+                      <input type="text" className="captcha_code" placeholder={GenCaptcha} readOnly></input>
+                      <i className="fa fa-recycle"></i>
                     </div>
                   </div>
                   <div className="card-footer">
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" className="contact-btn"/>
                   </div>
-
-                  {msg.message ? <div className="alert alert-success text-center" role="alert">
+                  
+                  {msg.message ? <div className="text-success">
                           {msg.message}
                         </div> : ""}
                         {msg.error ? 
-                        <div className="alert alert-danger text-center" role="alert">
+                        <div className="text-danger">
                            {msg.error}
                         </div> : ""}
                 </form>

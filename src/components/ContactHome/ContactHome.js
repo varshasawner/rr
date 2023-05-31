@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ContactHome = () => {
   const [msg, setMsg] = useState("");
@@ -46,6 +46,8 @@ const ContactHome = () => {
       formData.set("fullName", contactHomeData.fullName);
       formData.set("email", contactHomeData.email);
       formData.set("message", contactHomeData.message);
+      formData.set("captcha", GenCaptcha);
+      formData.set("captchaText", contactHomeData.captchaText);
 
       const res = await fetch("/contactHome", {
         method: "post",
@@ -62,6 +64,7 @@ const ContactHome = () => {
           fullName: "",
           email: "",
           message: "",
+          captchaText:""
         });
         generate();
       }
@@ -119,7 +122,18 @@ const ContactHome = () => {
                         ></textarea>
                       </div>
                     </div>
-
+                    <div className="row pt-3">
+                      <div className="col-md-12">
+                        <input 
+                        type="text" 
+                        className="form-control contact_field" 
+                        placeholder="Captcha Code"
+                        name="captchaText"
+                        value={contactHomeData.captchaText}
+                        onChange={handleFormData}>
+                        </input>
+                      </div>
+                    </div>
                     <div className="form-group pt-3">
                       <input
                         type="text"
@@ -142,17 +156,17 @@ const ContactHome = () => {
                         and give my consent to receive emails/phone.
                       </label>
                     </div>
-                    <div className="text-center pt-5">
+                    <div className="text-center pt-3">
                       <input
                         type="submit"
-                        className="btn btn-primary rounded"
+                        value="Submit"
+                        className="btn btn_submit text-white btn-primary"
                       />
                     </div>
                   </form>
                   {msg.message ? (
                     <div
-                      className="alert alert-success text-center"
-                      role="alert"
+                      className="text-success"
                     >
                       {msg.message}
                     </div>
@@ -161,8 +175,7 @@ const ContactHome = () => {
                   )}
                   {msg.error ? (
                     <div
-                      className="alert alert-danger text-center"
-                      role="alert"
+                      className="text-danger"
                     >
                       {msg.error}
                     </div>
