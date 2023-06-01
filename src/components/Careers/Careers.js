@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import interview from "./images/job-interview-in-career.png";
 import bitbyteCul from "./images/BitByte_Culture.jpg";
 import bitbyteLead from "./images/BitByte_Leadership.png";
 import learning from "./images/Learning&Opportunity.jpg";
+import Button from "./Button";
 
 const Careers = () => {
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    getJobs();
+  }, []);
+
+  const getJobs = () => {
+    fetch("/job")
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        // console.log(res);
+        setJobs(res);
+      });
+  };
+
   return (
     <>
       <div className="careers">
-        
         <div className="diagonal-box bg-one">
           <div className="container common_space careerSec1">
             <div className="row ">
@@ -102,56 +119,26 @@ const Careers = () => {
             </div>
             <div className="container-fluid col-md-12 cardSec pt-5">
               <div className="row">
-                <div className="col-md-4 pt-2">
-                  <div className="card">
-                    <div className="card-body">
-                      <p className="role">Android Developer</p>
-                      <p className="divider"></p>
-                      <br />
-                      <p>Desired Experience</p>
-                      <p>0-1 year</p>
+                {jobs.map((job) => {
+                  return (
+                    <div className="col-md-4 pt-2">
+                      <div className="card">
+                        <div className="card-body">
+                          <p className="role">{job.jobRole}</p>
+                          <p className="divider"></p>
+                          <br />
+                          <p>Desired Experience</p>
+                          <p>0-{job.experience} year</p>
+                        </div>
+                        <div className="card-footer">
+                          <Link to='/jobdescription'>
+                            <Button role={job.jobRole} experience={job.experience} skills={job.skills}/>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-                    <div className="card-footer">
-                      <Link to="/jobdescription">
-                        <button>View Job</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 pt-2">
-                  <div className="card card2">
-                    <div className="card-body">
-                      <p className="role">Digital Marketing Analyst</p>
-                      <p className="divider"></p>
-
-                      <br />
-                      <p>Desired Experience</p>
-                      <p>0-1 year</p>
-                    </div>
-                    <div className="card-footer">
-                      <Link to="/jobdescription">
-                        <button>View Job</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 pt-2">
-                  <div className="card">
-                    <div className="card-body">
-                      <p className="role">BDE Client Acquisition</p>
-                      <p className="divider"></p>
-
-                      <br />
-                      <p>Desired Experience</p>
-                      <p>0-1 year</p>
-                    </div>
-                    <div className="card-footer">
-                      <Link to="/jobdescription">
-                        <button>View Job</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -1,9 +1,18 @@
-import React, { createRef, useState, useEffect } from "react";
+import React, { createRef, useState, useEffect, useContext } from "react";
+import {Role, Experience, Skills} from './../Careers/Button'
 
 const JobDescrption = () => {
   const [GenCaptcha, setGenCaptcha] = useState("");
   const [msg, setMsg] = useState("");
+  const [role, setRole] = useState("");
   const file = createRef();
+
+  const role1 = useContext(Role);
+  useEffect(()=>{
+    setRole(role1);
+  }, [role])
+  
+  
 
   const [user, setUser] = useState({
     firstName: "",
@@ -89,14 +98,14 @@ const JobDescrption = () => {
           <div className="container common_space jobDesHead">
             <div className="row">
               <div className="col-md-12">
-                <h2 className="job_title text-center">Job Role</h2>
+                <h2 className="job_title text-center">{role}....</h2>
               </div>
             </div>
             <div className="jobDesReq">
               <div className="row">
                 <div className="col-md-6 content">
                   <h3 className="job_description">Job Description</h3>
-                  <h4 className="job_subtitle">Job Role</h4>
+                  <h4 className="job_subtitle">ABC</h4>
                   <p className="experience">0-1 Year / 0-1 Opening / Indore</p>
                   <h4 className="job_skills">
                     Skills, Roles, and Responsibilities
